@@ -9,17 +9,8 @@ jobs:
             - name: Checkout Repo
               uses: actions/checkout@v4
 
-            - name: Install Cowsay Program
-              run: sudo apt-get install cowsay -y
-
-            - name: Execute Cowsay CMD
-              run: cowsay -f dragon "Breathing Fire....I'm the dragon king" >> dragon.txt
-
-            - name: Test File Exists
-              run: grep -i "dragon" dragon.txt
-
-            - name: Read File
-              run: cat dragon.txt
-
             - name: List Repo Files
               run: ls -ltra
+
+            - name: Execute Shell Script
+              run: ./ascii-script.sh
