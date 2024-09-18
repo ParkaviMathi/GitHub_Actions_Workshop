@@ -12,10 +12,11 @@ jobs:
             - name: Execute Cowsay CMD
               run: cowsay -f dragon "Breathing Fire...I'm the dragon king...!!" >> dragon.txt
 
-            - name: Sleep for 30 seconds
-              run: sleep 30
+            - name: Sleep for 10 seconds
+              run: sleep 10
 
     test_job_2:
+        needs: build_job_1
         runs-on: ubuntu-latest
         steps:
             - name: Sleep for 10 seconds
@@ -25,6 +26,7 @@ jobs:
               run: grep -i "dragon" dragon.txt
     
     deploy_job_3:
+        needs: test_job_2
         runs-on: ubuntu-latest
         steps:
             - name: Read File
