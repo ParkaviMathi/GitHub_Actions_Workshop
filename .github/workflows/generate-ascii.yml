@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Install Cowsay program
-              uses: sudo apt-get install cowsay -y
+              run: sudo apt-get install cowsay -y
 
             - name: Execute Cowsay CMD
               run: cowsay -f dragon "Breathing Fire...I'm the dragon king...!!" >> dragon.txt
@@ -19,7 +19,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Sleep for 10 seconds
-              uses: sleep 10
+              run: sleep 10
 
             - name: test File Exists
               run: grep -i "dragon" dragon.txt
@@ -28,7 +28,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Read File
-              uses: cat dragon.txt
+              run: cat dragon.txt
 
             - name: Deploy
               run: echo Deploying...
