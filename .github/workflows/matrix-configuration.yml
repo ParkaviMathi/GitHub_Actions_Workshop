@@ -4,22 +4,41 @@ on:
     push:
     workflow_dispatch: 
 
+##############deploying the same job on different OS or versions ###############################
+
+#jobs: 
+#    deploy-on-ubuntu:
+#        runs-on: ubuntu-latest
+#        steps:
+#            - name: Echo Docker Details
+#              run: docker info
+#
+#            - name: Run Images
+#              run: docker run hello-world
+#
+#
+#    deploy-on-windows:
+#        runs-on: windows-latest
+#        steps:
+#            - name: Echo Docker Details
+#              run: docker info
+#
+#            - name: Run Images
+#              run: docker run hello-world
+#
+
+####################running same task on different os or version using single job ################
+
 jobs: 
-    docker-on-ubuntu:
-        runs-on: ubuntu-latest
+    deploy:
+        strategy:
+            matrix:
+                os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+                images: [hello-world, alpine]
+        runs-on: ${{ matrix.os}}
         steps:
             - name: Echo Docker Details
               run: docker info
 
-            - name: Run Images
-              run: docker run hello-world
-
-
-    deploy-on-windows:
-        runs-on: windows-latest
-        steps:
-            - name: Echo Docker Details
-              run: docker info
-
-            - name: Run Images
-              run: docker run hello-world
+            - name: Run Images on ${{ matrix.os}}
+              run: docker run ${{ matrix.images}}
